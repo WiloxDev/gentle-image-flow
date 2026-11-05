@@ -1,0 +1,1 @@
+{"version":3,"file":"list.js","sourceRoot":"","sources":["../../src/commands/list.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,YAAY,CAAC;AAEzC,MAAM,UAAU,cAAc,CAAC,QAAiC;IAC9D,MAAM,OAAO,GAAG,WAAW,CAAC,gBAAgB,CAAC,QAAQ,CAAC,CAAC;IACvD,OAAO,WAAW,CAAC,gBAAgB,CAAC,OAAO,EAAE,QAAQ,CAAC,YAAY,CAAC,CAAC;AACtE,CAAC"}

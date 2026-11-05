@@ -1,0 +1,69 @@
+{
+  "name": "@wiloxdev/gentle-image-flow",
+  "version": "1.0.0",
+  "description": "Deterministic, cross-platform image generation and editing flow for Gentle-Shell and Pi",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": {
+      "default": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "gentle-shell-package",
+    "gentle-shell-extension",
+    "gentle-hub-project",
+    "pi-package",
+    "image-generation",
+    "image-flow",
+    "cross-platform"
+  ],
+  "author": "Wilox & Gentle-Shell Community",
+  "license": "Apache-2.0",
+  "pi": {
+    "image": "./assets/logo-neon.png",
+    "skills": [
+      "./skills"
+    ],
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": ">=1.5.0",
+    "@earendil-works/pi-coding-agent": ">=1.5.0",
+    "@types/node": "^22.20.5",
+    "typebox": "^1.4.4",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": ">=0.80.10",
+    "@earendil-works/pi-coding-agent": ">=0.79.1",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "typebox": {
+      "optional": true
+    },
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "typebox": "*"
+  }
+}
