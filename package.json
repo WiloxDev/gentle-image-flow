@@ -16,8 +16,11 @@
   },
   "scripts": {
     "build": "tsc -b",
+    "dev": "tsc -b -w",
     "typecheck": "tsc -b --pretty false",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepare": "npm run build",
+    "prepack": "npm run build && npm test"
   },
   "keywords": [
     "gentle-shell-package",

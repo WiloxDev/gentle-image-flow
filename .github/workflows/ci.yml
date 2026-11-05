@@ -1,0 +1,43 @@
+name: CI & Build Verification
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    name: Build, Typecheck & Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck TypeScript
+        run: npm run typecheck
+
+      - name: Build ESM Bundles
+        run: npm run build
+
+      - name: Run Unit & E2E Tests
+        run: npm test
+
+      - name: Verify dist synchronization
+        run: |
+          if [ -n "$(git status --porcelain dist/)" ]; then
+            echo "Error: dist/ is out of sync with src/. Run 'npm run build' and commit changes."
+            git status --porcelain dist/
+            exit 1
+          fi
