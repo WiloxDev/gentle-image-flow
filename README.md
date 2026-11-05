@@ -38,6 +38,8 @@ Las extensiones tradicionales de generación de imágenes (como `@amaster.ai/pi-
 
 ## 🚀 Instalación
 
+> 🤖 **Para Instalación Asistida por AI (Claude, Pi, Cursor):** Consulta estrictamente [AI_INSTALL.md](AI_INSTALL.md). Este paquete es una **Herramienta y Modal Headless**, NO debe generar widgets en chat.
+
 ### Desde el gestor de paquetes de Pi
 ```bash
 pi install npm:@wiloxdev/gentle-image-flow
