@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://gentlemanprogramming.com/gentle-hub/"><img src="https://img.shields.io/badge/Gentle%20Hub-Extension-F095C8?style=flat-square" alt="Gentle Hub" /></a>
-  <a href="https://bit.ly/48zTJUo"><img src="https://img.shields.io/badge/Discord-Apoyo-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord Support" /></a>
+  <a href="https://bit.ly/48zTJUo"><img src="https://img.shields.io/badge/Discord-Feedback%20%26%20Sugerencias-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord Feedback & Sugerencias" /></a>
   <a href="#instalación"><img src="https://img.shields.io/badge/Pi-Extension-blue?style=flat-square" alt="Pi Extension" /></a>
   <a href="#ecosistema"><img src="https://img.shields.io/badge/Gentle--Shell-Homologado-success?style=flat-square" alt="Gentle-Shell" /></a>
   <a href="#plataformas"><img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blueviolet?style=flat-square" alt="Cross-Platform" /></a>
@@ -18,7 +18,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-yellow?style=flat-square" alt="License" /></a>
 </p>
 
-> 💬 **Comunidad y Soporte Oficial:** `wilox2` · [Servidor de Discord](https://bit.ly/48zTJUo)
+> 💬 **Feedback & Sugerencias:** `wilox2` · [Servidor de Discord](https://bit.ly/48zTJUo)
 
 ---
 
