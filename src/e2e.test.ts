@@ -55,8 +55,12 @@ describe('Gentle Image Flow - End-to-End Live Tool Smoke Test', () => {
       registerTool(tool: any) {
         registeredTool = tool;
       },
-      registerCommand(cmd: any) {
-        registeredCommands.set(cmd.name, cmd);
+      registerCommand(nameOrCmd: any, maybeOptions?: any) {
+        if (typeof nameOrCmd === 'string') {
+          registeredCommands.set(nameOrCmd, { name: nameOrCmd, ...maybeOptions });
+        } else if (nameOrCmd && typeof nameOrCmd.name === 'string') {
+          registeredCommands.set(nameOrCmd.name, nameOrCmd);
+        }
       },
       getSettings() {
         return {

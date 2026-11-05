@@ -198,37 +198,48 @@ export default function gentleImageFlowExtension(pi: any): void {
 
   // Registrar Slash Commands para Gentle-Shell y Pi
   if (typeof pi.registerCommand === 'function') {
-    pi.registerCommand({
-      name: 'gif',
-      description: 'Gentle Image Flow: gestión de imágenes, setup, galería y listado.',
-      execute(args: string, ctx: any) {
-        loadConfig();
-        const sub = (args || '').trim().split(' ')[0].toLowerCase();
+    const handleGif = (args: string, ctx: any) => {
+      loadConfig();
+      const sub = (args || '').trim().split(' ')[0].toLowerCase();
 
-        if (sub === 'setup') {
-          const reports = SetupWizard.inspectProviders(settings);
-          ctx?.ui?.notify(SetupWizard.formatReportText(reports, settings.defaultModel));
-          return;
-        }
+      if (sub === 'setup') {
+        const reports = SetupWizard.inspectProviders(settings);
+        ctx?.ui?.notify(SetupWizard.formatReportText(reports, settings.defaultModel));
+        return;
+      }
 
-        if (sub === 'gallery') {
-          ctx?.ui?.notify(SessionGallery.formatGalleryText());
-          return;
-        }
+      if (sub === 'gallery') {
+        ctx?.ui?.notify(SessionGallery.formatGalleryText());
+        return;
+      }
 
-        // Por defecto: /gif list
-        ctx?.ui?.notify(runListCommand(settings));
-      },
-    });
+      // Por defecto: /gif list
+      ctx?.ui?.notify(runListCommand(settings));
+    };
 
-    pi.registerCommand({
-      name: 'image-flow',
-      description: 'Alias canónico para /gif',
-      execute(args: string, ctx: any) {
-        const gifCmd = (pi as any).commands?.get?.('gif');
-        if (gifCmd) gifCmd.execute(args, ctx);
-      },
-    });
+    const registerCmd = (name: string, description: string, handler: (args: string, ctx: any) => void) => {
+      try {
+        // Formato canónico del SDK de Pi: pi.registerCommand(name, { description, handler })
+        (pi.registerCommand as any)(name, {
+          description,
+          handler,
+          execute: handler,
+        });
+      } catch (_e) {
+        // Fallback para entornos legacy que acepten un único objeto
+        try {
+          (pi.registerCommand as any)({
+            name,
+            description,
+            handler,
+            execute: handler,
+          });
+        } catch (_e2) {}
+      }
+    };
+
+    registerCmd('gif', 'Gentle Image Flow: gestión de imágenes, setup, galería y listado.', handleGif);
+    registerCmd('image-flow', 'Alias canónico para /gif', handleGif);
   }
 }
 

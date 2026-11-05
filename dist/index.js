@@ -158,34 +158,45 @@ export default function gentleImageFlowExtension(pi) {
     });
     // Registrar Slash Commands para Gentle-Shell y Pi
     if (typeof pi.registerCommand === 'function') {
-        pi.registerCommand({
-            name: 'gif',
-            description: 'Gentle Image Flow: gestión de imágenes, setup, galería y listado.',
-            execute(args, ctx) {
-                loadConfig();
-                const sub = (args || '').trim().split(' ')[0].toLowerCase();
-                if (sub === 'setup') {
-                    const reports = SetupWizard.inspectProviders(settings);
-                    ctx?.ui?.notify(SetupWizard.formatReportText(reports, settings.defaultModel));
-                    return;
+        const handleGif = (args, ctx) => {
+            loadConfig();
+            const sub = (args || '').trim().split(' ')[0].toLowerCase();
+            if (sub === 'setup') {
+                const reports = SetupWizard.inspectProviders(settings);
+                ctx?.ui?.notify(SetupWizard.formatReportText(reports, settings.defaultModel));
+                return;
+            }
+            if (sub === 'gallery') {
+                ctx?.ui?.notify(SessionGallery.formatGalleryText());
+                return;
+            }
+            // Por defecto: /gif list
+            ctx?.ui?.notify(runListCommand(settings));
+        };
+        const registerCmd = (name, description, handler) => {
+            try {
+                // Formato canónico del SDK de Pi: pi.registerCommand(name, { description, handler })
+                pi.registerCommand(name, {
+                    description,
+                    handler,
+                    execute: handler,
+                });
+            }
+            catch (_e) {
+                // Fallback para entornos legacy que acepten un único objeto
+                try {
+                    pi.registerCommand({
+                        name,
+                        description,
+                        handler,
+                        execute: handler,
+                    });
                 }
-                if (sub === 'gallery') {
-                    ctx?.ui?.notify(SessionGallery.formatGalleryText());
-                    return;
-                }
-                // Por defecto: /gif list
-                ctx?.ui?.notify(runListCommand(settings));
-            },
-        });
-        pi.registerCommand({
-            name: 'image-flow',
-            description: 'Alias canónico para /gif',
-            execute(args, ctx) {
-                const gifCmd = pi.commands?.get?.('gif');
-                if (gifCmd)
-                    gifCmd.execute(args, ctx);
-            },
-        });
+                catch (_e2) { }
+            }
+        };
+        registerCmd('gif', 'Gentle Image Flow: gestión de imágenes, setup, galería y listado.', handleGif);
+        registerCmd('image-flow', 'Alias canónico para /gif', handleGif);
     }
 }
 function resolveProviderApi(modelId, settings) {
